@@ -1,5 +1,9 @@
 ﻿using Lista_de_Tarefas;
 
+string CaminhoRelativo = @"Tarefas Salvas";
+
+Directory.CreateDirectory(CaminhoRelativo);
+
 bool ProgramaAberto = true;
 string Input;
 
