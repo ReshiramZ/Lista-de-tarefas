@@ -14,11 +14,57 @@ namespace Lista_de_Tarefas
     {
         private static List<string> ListaDeTarefas = new();
         private static string DiretorioPrincipal = "Tarefas Salvas/";
-        private static string ArquivoComFormato;
-        private static string NomeArquivo;
         private static bool ConverterDeuCerto;
+        private static bool ProgramaAberto = true;
+        public static void MenuPrincipal()
+        {
+            string CaminhoRelativo = @"Tarefas Salvas";
+            Directory.CreateDirectory(CaminhoRelativo);
+            
+            while (ProgramaAberto == true)
+            {
+                string Input;
+                Console.Clear();
+                Console.WriteLine("O que deseja fazer?\n");
+                Console.WriteLine("A. Adicionar tarefa\n" +
+                                  "D. Deletar tarefa\n" +
+                                  "M. Marcar tarefa\n\n" +
+                                  "O. Outras opções\n" +
+                                  "Q. Sair do programa\n");
 
+                ListarTarefas();
 
+                Input = Console.ReadLine().ToUpper();
+
+                switch (Input)
+                {
+                    case "A":
+                        AdicionarTarefa();
+                        break;
+
+                    case "D":
+                        DeletarTarefa();
+                        break;
+
+                    case "M":
+                        MarcarTarefa();
+                        break;
+
+                    case "O":
+                        OutrasOpcoes();
+                        break;
+
+                    case "Q":
+                        ProgramaAberto = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Opção inválida, digite novamente");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
         public static void AdicionarTarefa()
         {
             string Tarefa;
@@ -26,7 +72,7 @@ namespace Lista_de_Tarefas
             Tarefa = Console.ReadLine();
             if (!string.IsNullOrEmpty(Tarefa)) // Verifica se a string está vazia ou não.
             {
-                ListaDeTarefas.Add(Tarefa);                                     
+                ListaDeTarefas.Add(Tarefa);
             }
             else
             {
@@ -34,14 +80,13 @@ namespace Lista_de_Tarefas
                 Console.ReadKey();
             }
         }
-
         public static void DeletarTarefa()
         {
             if (ListaDeTarefas.Count > 0)
             {
                 Console.WriteLine("Qual tarefa você quer deletar?");
                 ConverterDeuCerto = int.TryParse(Console.ReadLine(), out int DeletarTarefa);
-                
+
                 if (ConverterDeuCerto == true)
                 {
                     if (DeletarTarefa >= 0 && DeletarTarefa < ListaDeTarefas.Count)
@@ -68,7 +113,7 @@ namespace Lista_de_Tarefas
         public static void MarcarTarefa()
         {
             if (ListaDeTarefas.Count > 0)
-            { 
+            {
                 Console.WriteLine("Qual tarefa você quer marcar?");
                 ConverterDeuCerto = int.TryParse(Console.ReadLine(), out int MarcarTarefa);
                 if (ConverterDeuCerto == true)
@@ -104,6 +149,9 @@ namespace Lista_de_Tarefas
         }
         public static void SalvarLista() // Salva um arquivo .txt em uma subpasta, que fica na pasta Raíz do executável
         {
+            string ArquivoComFormato;
+            string NomeArquivo;
+
             if (ListaDeTarefas.Count > 0)
             {
                 Console.WriteLine("Digite o nome do arquivo...");
@@ -131,7 +179,6 @@ namespace Lista_de_Tarefas
             int Contador = 0;
             var Arquivos = Directory.GetFiles(DiretorioPrincipal);
 
-            Console.Clear();
             Console.WriteLine("Selecione uma lista salva:\n");
 
             foreach (var Arquivo in Arquivos)
@@ -169,7 +216,6 @@ namespace Lista_de_Tarefas
 
             Console.ReadKey();
         }
-
         public static void SobrescreverLista()
         {
             var Arquivos = Directory.GetFiles(DiretorioPrincipal);
@@ -202,7 +248,41 @@ namespace Lista_de_Tarefas
             }
             Console.ReadKey();
         }
+        public static void OutrasOpcoes()
+        {
+            Console.Clear();
+            Console.WriteLine("Mais Opções...\n");
+            Console.WriteLine("S. Salvar lista de tarefas\n" +
+                              "C. Carregar uma lista de tarefas\n" +
+                              "O. Sobrescrever lista de tarefas\n\n" +
+                              "V. Voltar\n");
 
+            string Input = Console.ReadLine().ToUpper();
+            switch (Input)
+            {
+                case "S":
+                    SalvarLista();
+                    break;
+
+                case "C":
+                    CarregarLista();
+                    break;
+
+                case "O":
+                    SobrescreverLista();
+                    break;
+
+                case "V":
+                    MenuPrincipal();
+                    break;
+
+                default:
+                    Console.WriteLine("Opção inválida, digite novamente");
+                    Console.ReadKey();
+                    OutrasOpcoes();
+                    break;
+            }
+        }
         public static void ListarTarefas()
         {
             for (int i = 0; i < ListaDeTarefas.Count; i++)
