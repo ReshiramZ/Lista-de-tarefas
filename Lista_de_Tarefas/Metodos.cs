@@ -70,7 +70,7 @@ namespace Lista_de_Tarefas
             string Tarefa;
             Console.WriteLine("O que deseja anotar?");
             Tarefa = Console.ReadLine();
-            if (!string.IsNullOrEmpty(Tarefa)) // Verifica se a string está vazia ou não.
+            if (!string.IsNullOrWhiteSpace(Tarefa)) // Verifica se a string está vazia ou não.
             {
                 ListaDeTarefas.Add(Tarefa);
             }
@@ -157,7 +157,7 @@ namespace Lista_de_Tarefas
                 Console.WriteLine("Digite o nome do arquivo...");
 
                 NomeArquivo = Console.ReadLine();
-                if (!string.IsNullOrEmpty(NomeArquivo))
+                if (!string.IsNullOrWhiteSpace(NomeArquivo))
                 {
                     ArquivoComFormato = $"Tarefas Salvas/{NomeArquivo}.txt";
                     File.WriteAllLines(ArquivoComFormato, ListaDeTarefas);
