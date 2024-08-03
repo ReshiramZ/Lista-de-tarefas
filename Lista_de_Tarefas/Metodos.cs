@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -16,6 +16,10 @@ namespace Lista_de_Tarefas
         private static string DiretorioPrincipal = "Tarefas Salvas/";
         private static bool ConverterDeuCerto;
         private static bool ProgramaAberto = true;
+<<<<<<< HEAD
+=======
+        
+>>>>>>> origin/main
         public static void MenuPrincipal()
         {
             string CaminhoRelativo = @"Tarefas Salvas";

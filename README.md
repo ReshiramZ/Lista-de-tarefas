@@ -23,5 +23,5 @@ Significa que o nome da lista que você colocou está em branco. *solução:*
 não coloque um nome vazio, coloque um nome que realmente tenha letras, palavras, números etc.
 
 ## Perguntas
-### "Cadê está a pasta onde fica as listas salvas?"
+### "Onde está a pasta que fica as listas salvas?"
 fica em uma pasta na raís do arquivo executável chamado de "Tarefas Salvas".
